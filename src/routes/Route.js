@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import AuthLayout from '../_layouts/auth';
 import DefaultLayout from '../_layouts/default';
 
+import { store } from '~/store';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const signed = false;
+  const { signed } = store.getState().auth;
 
   const Layout = signed ? DefaultLayout : AuthLayout;
 

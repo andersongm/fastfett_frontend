@@ -1,19 +1,25 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { Container } from './styles';
 import logo from '../../assets/fastfeet-logo.png';
+import { signInRequest } from '../../store/modules/auth/actions';
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Insira um email válido')
+    .required('O email é obrigatório'),
+  password: Yup.string().required('A senha é obrigatória'),
+});
 
 export default function SignIn() {
-  const schema = Yup.object().shape({
-    email: Yup.string()
-      .email('Insira um email válido')
-      .required('O email é obrigatório'),
-    password: Yup.string().required('A senha é obrigatória'),
-  });
 
-  function handleSubmit(data) {
-    console.log(data);
+  const dispatch = useDispatch();
+
+  function handleSubmit({ email, password }) {
+
+    dispatch(signInRequest(email,password));
   }
 
   return (
