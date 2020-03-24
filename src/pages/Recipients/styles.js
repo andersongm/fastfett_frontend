@@ -1,28 +1,9 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
 
 export const Container = styled.div`
     max-width: 1200px;
     margin: 0 auto;
 `;
-
-export const Pagination = styled.div`
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  button {
-    width: 48px;
-    padding: 2px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-left: 10px;
-    color: #fff;
-    background: #7d3fe7;
-  }
-`;
-
 
 export const TableList = styled.table`
   width: 100%;
@@ -33,7 +14,6 @@ export const TableList = styled.table`
   font-size: 16px;
   color: #666;
 
-
   thead {
     text-align: left;
 
@@ -41,18 +21,14 @@ export const TableList = styled.table`
         display: flex;
 
         th {
-            width: 35%;
+            width: 50%;
 
             &:first-child {
-              width: 10%
-            }
-
-            &:nth-child(6){
-              width: 40%;
+              width: 15%
             }
 
             &:last-child {
-              width: 15%;
+              width: 11%;
               text-align: center;
             }
 
@@ -63,36 +39,27 @@ export const TableList = styled.table`
 
   tbody {
 
-    tr:hover.delivery {
-      background: ${darken(0.2, '#fff')};
-    }
-
     tr {
         display: flex;
         padding: 15px 0;
         border-bottom: 1px solid #eee;
 
-
         td {
-            width: 35%;
+            width: 50%;
 
             &:first-child {
-              width: 10%
-            }
-
-            &:nth-child(6){
-              width: 40%;
+              width: 15%;
             }
 
             &:last-child {
-              width: 15%;
-              text-align: center;
+              width: 11%;
+              text-align: center
             }
+
 
         }
 
     }
-
   }
 
   `;

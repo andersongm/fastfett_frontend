@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background: #fff;
   padding: 0 10px;
+  /* position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%; */
 `;
 
 export const ItemMenu = styled.li`
@@ -36,6 +40,14 @@ export const Profile = styled.div`
       font-size: 12px;
       color: #999;
     }
+  }
+
+  button {
+      margin-top: 5px;
+      color: #f00;
+      border: 0;
+      border-radius: 4px;
+      font-size: 12px;
   }
 
   img {

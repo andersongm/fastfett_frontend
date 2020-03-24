@@ -1,36 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Container, TableList, ImageDeliveryman } from './styles';
+import { MdMoreHoriz } from 'react-icons/md';
+import api from '~/services/api';
+import HeaderPage from '../../components/HeaderPage';
+import DropDownMenu from '~/components/DropDownMenu';
 
-import { Container, TableList } from './styles';
+import memoize from "memoize-one"
 
-import HeaderPage from '~/components/HeaderPage';
+export default function Deliverymans({location}) {
 
+  const [deliverymans, setDeliverieMans] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [name, setName] = useState('');
+  const [currentRow, setCurrentRow] = useState(0);
+  const idDelete = location.state?.id;
 
-export default function Deliveriemans() {
+  useEffect(() => {
+    async function loadDeliverieMans() {
+      console.log('buscando deliverymans...');
+      const response = await api.get('/deliverymans');
+      setDeliverieMans(response.data);
+    }
+    loadDeliverieMans();
+  }, [idDelete])
+
+  const filterDeliveryMan = memoize((deliverymans, valor) => deliverymans.filter(deliveryMan => deliveryMan.name.match(new RegExp(valor, 'i'))));
+  const deliveryManSearch = filterDeliveryMan(deliverymans.filter(d => d.id !== idDelete), name);
+
+  function handleMenu(id) {
+    setCurrentRow(id);
+    setVisible(!visible);
+  }
+
   return (
     <Container>
-      <HeaderPage title="Gerenciando Entregadores" pathButton="/deliveriemans"/>
+      <HeaderPage
+        title="Gerenciando Entregadores"
+        pathButton="/deliverymans/add"
+        placeholderSearch="Buscar entregadores"
+        onChange={e => setName(e.target.value)} value={name}/>
       <TableList>
-      <thead>
+        <thead>
           <tr>
             <th>ID</th>
-            <th>Destinatário</th>
-            <th>Entregador</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Status</th>
-            <th>Ações</th>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Açoes</th>
           </tr>
         </thead>
         <tbody>
-            <tr>
-              <td>#01</td>
-              <td>Juca</td>
-              <td>Romário</td>
-              <td>Uberlandia</td>
-              <td>Minas Gerais</td>
-              <td>PENDENTE</td>
-              <td>ACOES</td>
+          {deliveryManSearch.map((deliveryMan, index) => (
+            <tr key={deliveryMan.id} >
+              <td>#{String(deliveryMan.id).padStart(2, "0")}</td>
+              <td><ImageDeliveryman src={deliveryMan.avatar.url || 'https://api.adorable.io/avatars/50/abott@adorable.png'}/></td>
+              <td>{deliveryMan.name}</td>
+              <td>{deliveryMan.email}</td>
+              <td>{index === currentRow ? (<DropDownMenu visible={visible} entity="deliverymans" item={deliveryMan}/>) : ''}<MdMoreHoriz size={20} color="#666" onClick={() => handleMenu(index)} /></td>
             </tr>
+          ))}
         </tbody>
       </TableList>
     </Container>

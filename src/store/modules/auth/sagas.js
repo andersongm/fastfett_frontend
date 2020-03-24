@@ -15,12 +15,6 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    // if (!user.provider) {
-    //   // console.tron.error('Usuário não é prestador e serviços');
-    //   toast.error('Usuário não é prestador e serviços');
-    //   return;
-    // }
-
     console.tron.log(response.data);
 
     api.defaults.headers.Autorization = `Bearer ${token}`;

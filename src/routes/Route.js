@@ -13,6 +13,7 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
+
   const { signed } = store.getState().auth;
 
   const Layout = signed ? DefaultLayout : AuthLayout;
@@ -30,7 +31,7 @@ export default function RouteWrapper({
       {...rest}
       render={props => (
         <Layout>
-          <Component {...props} />
+          <Component {...props} onClick={() => alert('opa')} />
         </Layout>
       )}
     />

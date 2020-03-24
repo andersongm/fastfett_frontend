@@ -5,7 +5,7 @@ import { MdAddCircle } from 'react-icons/md';
 import { AddButton } from './styles';
 
 export default function RegisterButton({ to }) {
-  return (<AddButton to={to}><MdAddCircle size={14} color="#FFF" />CADASTRAR</AddButton>);
+  return (<AddButton to={to}><MdAddCircle size={16} color="#FFF" />CADASTRAR</AddButton>);
 }
 
 RegisterButton.propTypes = {
@@ -13,5 +13,5 @@ RegisterButton.propTypes = {
 };
 
 RegisterButton.defaultProps = {
-  to: null,
+  to: ''
 };

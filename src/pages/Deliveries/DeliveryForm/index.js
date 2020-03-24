@@ -1,19 +1,27 @@
 import React, { useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import Select from 'react-select';
-
-import { Container, Content, DataDelivery, HeaderForm, selectStyles } from './styles';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+import AsyncSelect from '~/components/AsyncSelect';
+import { Container, Content, DataDelivery, HeaderForm } from './styles';
 import SaveButton from '../../../components/SaveButton';
 import BackButton from '../../../components/BackButton';
-
+import { getTitlePage } from '~/util/Util';
 import api from '~/services/api';
 
-export default function DeliveryForm() {
+export default function DeliveryForm({ location }) {
+
+  const schema = Yup.object().shape({
+    recipient_id: Yup.string().nullable().required('Destinatário é obrigatório'),
+    deliveryman_id: Yup.string().nullable().required('Entregador é obrigatório'),
+    product: Yup.string().required('Produto é obrigatório'),
+  });
 
   const recOptions = [];
   const delOptions = [];
-
-  //const [recipients, setRecipients] = useState([]);
+  const deliveries = location.state?.item;
+  const item = location.state?.item;
+  const operation = location.pathname.split('/')[2];
 
   useEffect(() => {
     async function loadRecipients() {
@@ -32,8 +40,6 @@ export default function DeliveryForm() {
       const response = await api.get('/deliverymans');
       const deliverymans = response.data;
 
-      console.log(deliverymans);
-
       deliverymans.map(del => (
         delOptions.push({
           value: del.id,
@@ -45,17 +51,34 @@ export default function DeliveryForm() {
     loadRecipients()
     loadDeliverymans()
 
-  },[delOptions,recOptions])
+  }, [delOptions, recOptions])
 
-  function handleSubmit(data) {
-    console.log(data);
+  async function handleSubmit(data) {
+    try {
+
+      let response = null;
+
+      // Edicao da Encomenda
+      if (item) {
+        const { id } = item;
+        response = await api.put(`/deliveries/${id}`, data);
+      } else {
+        response = await api.post('/deliveries', data);
+      }
+
+      if (response.data) {
+        toast.success('Encomenda Salva com Sucesso!')
+      }
+    } catch (error) {
+      toast.error(`Falha ao salvar encomenda! \n ${error}`);
+    }
   }
 
   return (
     <Container>
-      <Form id="delivery" onSubmit={handleSubmit}>
+      <Form schema={schema} id="delivery" initialData={deliveries} onSubmit={handleSubmit}>
         <HeaderForm>
-          <h2>Cadastro de Encomendas</h2>
+          <h2>{getTitlePage(operation,"Encomendas")}</h2>
           <div>
             <BackButton to="/deliveries" />
             <SaveButton type="submit" />
@@ -64,19 +87,36 @@ export default function DeliveryForm() {
         <Content>
           <DataDelivery>
             <div className="row">
-              <label htmlFor="recipient_id">Destinatário</label>
-              <Select options={recOptions} styles={selectStyles} placeholder="Selecione..." name="recipient_id"/>
+              <AsyncSelect
+                label="Destinatário"
+                name="recipient_id"
+                entity="recipients"
+                placeholder="Selecione..."
+                selectValue={item?.recipient.name}
+                required
+                isDisabled={operation === 'show' ? true : false}
+              />
             </div>
             <div className="row">
-              <label htmlFor="deliveryman_id">Entregador</label>
-              {/* <Input name="deliveryman" type="text" placeholder="Entregador"/> */}
-              <Select options={delOptions} styles={selectStyles} placeholder="Selecione..." name="deliveryman_id" />
+              <AsyncSelect
+                label="Entregador"
+                name="deliveryman_id"
+                entity="deliverymans"
+                placeholder="Selecione..."
+                selectValue={item?.deliveryman.name}
+                required
+                isDisabled={operation === 'show' ? true : false}
+              />
             </div>
           </DataDelivery>
           <label htmlFor="product">Nome do Produto</label>
-          <Input name="product" type="text" placeholder="Nome do Produto"/>
+          <Input name="product" type="text" placeholder="Nome do Produto" disabled={operation === 'show' ? true : false}/>
         </Content>
       </Form>
     </Container>
   );
 }
+
+DeliveryForm.defaultProps = {
+  deliveries: [],
+};

@@ -2,22 +2,39 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 
-    background: '#f90';
-    width: 100px;
-    height: 100px;
-    background: #fff;
-    border: 1px solid #ccc;
+    &::before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      /* margin-right: 10px; */
+      width: 0;
+      height: 0;
+      position: absolute;
+      margin-top: -5px;
+      margin-left: -5px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #dddddd;
+    }
+
+    width: ${props => props.size.width};
+    height: ${props => props.size.height};
     display: ${props => (props.visible ? 'block' : 'none')};
+    background: #fff;
+    border: 1px solid #ddd;
     position: absolute;
-    left: ${props => ((props.position[0] - 120 ) +"px")};
-    top: ${props => ((props.position[1] - 4 )+"px")};
+    margin-top: 16px;
+    margin-left: ${props => props.size.right};
+
+
+
 
     li {
       padding: 5px;
-      margin-top: 2px;
+      text-align: left;
 
       &:hover {
-        background: #777
+        background: #eee
       }
     }
 

@@ -43,15 +43,6 @@ export const selectStyles = {
 
 }
 
-export const DataDelivery = styled.div`
-
-    div.row {
-        display: flex;
-        flex-direction: column;
-        width: 80%;
-    }
-`;
-
 export const HeaderForm = styled.div`
   display: flex;
   align-items: center;
@@ -66,7 +57,7 @@ export const HeaderForm = styled.div`
 `;
 
 export const Container = styled.div`
-    max-width: 1000px;
+    max-width: 800px;
     /* height: 85%; */
     margin: 0 auto;
 
@@ -92,7 +83,7 @@ export const Container = styled.div`
     span {
         color: #f00;
         margin-top: 2px;
-    }
+      }
 
 `;
 

@@ -5,6 +5,15 @@ export const Container = styled.div`
     margin: 0 auto;
 `;
 
+export const ImageDeliveryman = styled.img`
+  background: '#f90';
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid black; */
+  border-radius: 50px;
+`;
+
+
 export const TableList = styled.table`
   width: 100%;
   background: #fff;
@@ -28,7 +37,8 @@ export const TableList = styled.table`
             }
 
             &:last-child {
-              text-align: end
+              width: 11%;
+              text-align: center;
             }
 
         }
@@ -47,11 +57,12 @@ export const TableList = styled.table`
             width: 50%;
 
             &:first-child {
-              width: 15%
+              width: 15%;
             }
 
             &:last-child {
-              text-align: end
+              width: 11%;
+              text-align: center
             }
 
 
