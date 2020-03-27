@@ -8,7 +8,7 @@ export const Container = styled.div`
   border-radius: 25px;
   padding: 3px;
   font-size: 13px;
-  width: 54%;
+  width: 105px;
   justify-content: center;
 
   span {

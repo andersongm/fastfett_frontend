@@ -4,8 +4,9 @@ import { MdMoreHoriz } from 'react-icons/md';
 import api from '~/services/api';
 import HeaderPage from '../../components/HeaderPage';
 import DropDownMenu from '~/components/DropDownMenu';
+import Pagination from '~/components/Pagination';
 
-import memoize from "memoize-one"
+// import memoize from "memoize-one"
 
 export default function Deliverymans({location}) {
 
@@ -13,19 +14,30 @@ export default function Deliverymans({location}) {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState('');
   const [currentRow, setCurrentRow] = useState(0);
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [currentPage, setCurentPage] = useState(1);
   const idDelete = location.state?.id;
 
-  useEffect(() => {
-    async function loadDeliverieMans() {
-      console.log('buscando deliverymans...');
-      const response = await api.get('/deliverymans');
-      setDeliverieMans(response.data);
-    }
-    loadDeliverieMans();
-  }, [idDelete])
+  async function loadDeliverieMans(page = 1) {
+    const response = await api.get('/deliverymans', {
+      params: {
+        name,
+        page
+      }
+    });
 
-  const filterDeliveryMan = memoize((deliverymans, valor) => deliverymans.filter(deliveryMan => deliveryMan.name.match(new RegExp(valor, 'i'))));
-  const deliveryManSearch = filterDeliveryMan(deliverymans.filter(d => d.id !== idDelete), name);
+    const { count, rows } = response.data;
+    setDeliverieMans(rows);
+    setCurentPage(page);
+    setTotalRecords(count);
+  }
+
+  useEffect(() => {
+    loadDeliverieMans();
+  }, [idDelete, name])
+
+  // const filterDeliveryMan = memoize((deliverymans, valor) => deliverymans.filter(deliveryMan => deliveryMan.name.match(new RegExp(valor, 'i'))));
+  // const deliveryManSearch = filterDeliveryMan(deliverymans.filter(d => d.id !== idDelete), name);
 
   function handleMenu(id) {
     setCurrentRow(id);
@@ -37,7 +49,7 @@ export default function Deliverymans({location}) {
       <HeaderPage
         title="Gerenciando Entregadores"
         pathButton="/deliverymans/add"
-        placeholderSearch="Buscar entregadores"
+        placeholderSearch="Buscar Entregadores"
         onChange={e => setName(e.target.value)} value={name}/>
       <TableList>
         <thead>
@@ -50,10 +62,10 @@ export default function Deliverymans({location}) {
           </tr>
         </thead>
         <tbody>
-          {deliveryManSearch.map((deliveryMan, index) => (
+          {deliverymans.map((deliveryMan, index) => (
             <tr key={deliveryMan.id} >
               <td>#{String(deliveryMan.id).padStart(2, "0")}</td>
-              <td><ImageDeliveryman src={deliveryMan.avatar.url || 'https://api.adorable.io/avatars/50/abott@adorable.png'}/></td>
+              <td><ImageDeliveryman src={deliveryMan.avatar?.url || 'https://api.adorable.io/avatars/50/abott@adorable.png'}/></td>
               <td>{deliveryMan.name}</td>
               <td>{deliveryMan.email}</td>
               <td>{index === currentRow ? (<DropDownMenu visible={visible} entity="deliverymans" item={deliveryMan}/>) : ''}<MdMoreHoriz size={20} color="#666" onClick={() => handleMenu(index)} /></td>
@@ -61,6 +73,11 @@ export default function Deliverymans({location}) {
           ))}
         </tbody>
       </TableList>
+      <Pagination
+            currentPage={currentPage}
+            totalRecords={totalRecords}
+            handleChangePage={loadDeliverieMans}
+      />
     </Container>
   )
 }

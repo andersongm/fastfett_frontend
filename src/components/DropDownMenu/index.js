@@ -26,26 +26,22 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
       case 'deliveries':
         return {
           width: '100px',
-          height: '86px',
-          right: '-7px'
+          right: '-30px'
         }
       case 'recipients':
         return {
           width: '100px',
-          height: '58px',
-          right: '-1px'
+          right: '-30px'
         }
       case 'deliverymans':
         return {
           width: '100px',
-          height: '58px',
-          right: '-13px'
+          right: '-30px'
         }
       case 'problems':
         return {
           width: '172px',
-          height: '58px',
-          right: '-40px'
+          right: '-65px'
         }
         default:
         return false;

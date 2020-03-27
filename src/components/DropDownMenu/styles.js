@@ -18,7 +18,7 @@ export const Container = styled.div`
     }
 
     width: ${props => props.size.width};
-    height: ${props => props.size.height};
+    /* height: ${props => props.size.height}; */
     display: ${props => (props.visible ? 'block' : 'none')};
     background: #fff;
     border: 1px solid #ddd;

@@ -13,6 +13,7 @@ import api from '~/services/api';
 export default function DeliveryMansForm({ location }) {
 
   const schema = Yup.object().shape({
+    avatar_id: Yup.number(),
     name: Yup.string().required('Nome é obrigatório'),
     email: Yup.string().email().required('Email é obrigatório'),
   });
@@ -22,7 +23,6 @@ export default function DeliveryMansForm({ location }) {
   const operation = location.pathname.split('/')[2];
 
   async function handleSubmit(data) {
-
     try {
 
       let response = null;
@@ -44,7 +44,7 @@ export default function DeliveryMansForm({ location }) {
 
   return (
     <Container>
-      <Form schema={schema} id="delivery" initialData={deliverymans} onSubmit={handleSubmit}>
+      <Form schema={schema} id="deliveryman" initialData={deliverymans} onSubmit={handleSubmit}>
         <HeaderForm>
           <h2>{getTitlePage(operation,"Entregadores")}</h2>
           <div>
@@ -54,7 +54,8 @@ export default function DeliveryMansForm({ location }) {
         </HeaderForm>
         <Content>
 
-          <AvatarInput name="avatar_id" avatar={item?.avatar.url}/>
+          <AvatarInput name="avatar_id" avatar={item?.avatar?.url}/>
+          {/* <AvatarInput name="avatar_id" /> */}
 
           <label htmlFor="name">Nome</label>
           <Input name="name" placeholder="Nome"/>

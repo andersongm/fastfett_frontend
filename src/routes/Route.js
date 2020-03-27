@@ -31,7 +31,7 @@ export default function RouteWrapper({
       {...rest}
       render={props => (
         <Layout>
-          <Component {...props} onClick={() => alert('opa')} />
+          <Component {...props}  />
         </Layout>
       )}
     />

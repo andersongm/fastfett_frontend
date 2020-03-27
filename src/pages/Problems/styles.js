@@ -5,57 +5,58 @@ export const Container = styled.div`
     margin: 0 auto;
 `;
 
+export const ContainerModal = styled.div`
+  line-height: 2em;
+  p {
+    margin-bottom: 20px;
+  }
+`;
+
 export const TableList = styled.table`
   width: 100%;
-  background: #fff;
-  border-radius: 4px;
-  /* border-collapse: collapse;  */
-  padding: 30px 30px;
-  font-size: 16px;
-  color: #666;
+  border-spacing: 0 10px;
 
   thead {
-    text-align: left;
-
     tr {
-        display: flex;
+      th {
+        font-weight: bold;
+        text-align: left;
+        color: #444;
+        padding: 0 10px;
 
-        th {
-            width: 100%;
-            &:first-child {
-              width: 15%
-            }
-            &:last-child {
-              width: 10%;
-              text-align: center;
-            }
-
+        &:last-child {
+          text-align: center;
         }
-
+      }
     }
   }
 
   tbody {
-
     tr {
-        display: flex;
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
+      background: #fff;
 
-        td {
-            width: 100%;
-            &:first-child {
-              width: 15%;
-            }
-            &:last-child {
-              width: 10%;
-              text-align: center
-            }
+      td {
+        padding: 10px;
+        color: #666666;
 
-
+        &:first-child {
+          width: 40px;
         }
 
+        &:last-child {
+          width: 40px;
+          text-align: center;
+
+          svg {
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+
+        }
+      }
     }
   }
-
-  `;
+`;

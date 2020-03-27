@@ -1,48 +1,5 @@
 import styled from 'styled-components';
 
-export const selectStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected ? '#fff' : '#ee4d64',
-    background: state.isSelected ? '#ee4d64' : 'none',
-  }),
-  valueContainer: styles => ({
-    ...styles
-  }),
-  selectContainer: styles => ({
-    ...styles,
-    alignContent: 'center',
-    background: '#f90',
-  }),
-  control: (styles) => ({
-    ...styles,
-    height: 38,
-    justifyContent: 'center',
-    alignContent: 'center',
-    width: '98%'
-  }),
-  input: (styles) => ({
-    ...styles,
-    height: 40,
-    fontSize: 16,
-    // alignContent: 'center',
-    // justifyContent: 'center',
-    color: '#444',
-    fontWeight: 'bold',
-    // width: '500px',
-  }),
-  indicatorSeparator: styles => ({
-    //...styles,
-    display: 'none',
-    alignContent: 'center',
-    justifyContent: 'center'
-  }),
-  indicatorsContainer: () => ({
-    height: 38,
-  }),
-
-}
-
 export const HeaderForm = styled.div`
   display: flex;
   align-items: center;

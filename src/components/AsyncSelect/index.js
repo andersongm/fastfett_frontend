@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useField } from '@rocketseat/unform';
 import api from '~/services/api';
-import { selectStyles } from './styles';
+import { asyncSelectStyles } from './styles';
 
 export default function AsyncSelectInput({ label, name, entity, selectValue, ...rest }) {
   const ref = useRef(null);
@@ -10,24 +10,17 @@ export default function AsyncSelectInput({ label, name, entity, selectValue, ...
   const [inputName, setInputName] = useState('');
   const [selected, setSelected] = useState(null);
 
-  // async function loadInputValue(id) {
-  //   const { data } = await api.get(`/${entity}/${id}`);
-  //   setInputName(data.name);
-  // }
-
   async function loadOptions(inputValue) {
     const { data } = await api.get(`/${entity}`, {
       params: {
-        q: inputValue,
+        name: inputValue,
       },
     });
 
-    return data;
+    return data.rows;
   }
 
   useEffect(() => {
-
-
     if (defaultValue) {
       setSelected(defaultValue);
       setInputName(selectValue);
@@ -59,7 +52,7 @@ export default function AsyncSelectInput({ label, name, entity, selectValue, ...
         onInputChange={newValue => setInputName(newValue)}
         inputValue={inputName}
         loadOptions={loadOptions}
-        styles={selectStyles}
+        styles={asyncSelectStyles}
         ref={ref}
         {...rest}
       />

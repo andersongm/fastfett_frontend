@@ -34,4 +34,37 @@ function getAleatoryColor() {
   return color[number];
 }
 
-export { getTitlePage, getColor, getAleatoryColor };
+function getLetterColor(letter) {
+
+  const color = {
+    'A': '#DA70D6',
+    'B': '#FF0000',
+    'C': '#8470FF',
+    'D': '#7A67EE',
+    'E': '#FFA500',
+    'F': '#FF3E96',
+    'G': '#828282',
+    'H': '#CD853F',
+    'I': '#0000FF',
+    'J': '#DAA520',
+    'K': '#2E8B57',
+    'L': '#1E90FF',
+    'M': '#FF00FF',
+    'N': '#FF69B4',
+    'O': '#FF6347',
+    'P': '#CDCD00',
+    'Q': '#CD2626',
+    'R': '#7A67EE',
+    'S': '#9B30FF',
+    'T': '#EEC900',
+    'U': '#008B8B',
+    'W': '#BF3EFF',
+    'X': '#EE7621',
+    'Y': '#00B2EE',
+    'Z': '#006400',
+  }
+
+  return color[letter];
+}
+
+export { getTitlePage, getColor, getAleatoryColor, getLetterColor };

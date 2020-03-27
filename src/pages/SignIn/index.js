@@ -30,7 +30,7 @@ export default function SignIn() {
         <label htmlFor="">SEU E-MAIL</label>
         <Input name="email" type="email" placeholder="exemplo@email.com" />
         <label htmlFor="">SUA SENHA</label>
-        <Input name="password" type="password" />
+        <Input name="password" type="password" placeholder="Password"/>
         <button type="submit">Entrar no Sistema</button>
       </Form>
     </Container>

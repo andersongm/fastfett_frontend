@@ -7,3 +7,4 @@ export const Container = styled.div`
   text-align: center;
   border-radius: 5px;
 `;
+

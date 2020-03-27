@@ -7,59 +7,49 @@ export const Container = styled.div`
 
 export const TableList = styled.table`
   width: 100%;
-  background: #fff;
-  border-radius: 4px;
-  /* border-collapse: collapse;  */
-  padding: 30px 30px;
-  font-size: 16px;
-  color: #666;
+  border-spacing: 0 10px;
 
   thead {
-    text-align: left;
-
     tr {
-        display: flex;
+      th {
+        font-weight: bold;
+        text-align: left;
+        color: #444;
+        padding: 0 10px;
 
-        th {
-            width: 50%;
-
-            &:first-child {
-              width: 15%
-            }
-
-            &:last-child {
-              width: 11%;
-              text-align: center;
-            }
-
+        &:last-child {
+          text-align: center;
         }
-
+      }
     }
   }
 
   tbody {
-
     tr {
-        display: flex;
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
+      background: #fff;
 
-        td {
-            width: 50%;
+      td {
+        padding: 10px;
+        color: #666666;
 
-            &:first-child {
-              width: 15%;
-            }
-
-            &:last-child {
-              width: 11%;
-              text-align: center
-            }
-
-
+        &:first-child {
+          width: 40px;
         }
 
+        &:last-child {
+          width: 40px;
+          text-align: center;
+
+          svg {
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+
+        }
+      }
     }
   }
-
-  `;
+`;

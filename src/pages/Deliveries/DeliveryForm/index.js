@@ -26,7 +26,7 @@ export default function DeliveryForm({ location }) {
   useEffect(() => {
     async function loadRecipients() {
       const response = await api.get('/recipients');
-      const recipients = response.data;
+      const recipients = response.data.rows;
 
       recipients.map(rec => (
         recOptions.push({
@@ -38,7 +38,7 @@ export default function DeliveryForm({ location }) {
 
     async function loadDeliverymans() {
       const response = await api.get('/deliverymans');
-      const deliverymans = response.data;
+      const deliverymans = response.data.rows;
 
       deliverymans.map(del => (
         delOptions.push({
@@ -78,7 +78,7 @@ export default function DeliveryForm({ location }) {
     <Container>
       <Form schema={schema} id="delivery" initialData={deliveries} onSubmit={handleSubmit}>
         <HeaderForm>
-          <h2>{getTitlePage(operation,"Encomendas")}</h2>
+          <h2>{getTitlePage(operation, "Encomendas")}</h2>
           <div>
             <BackButton to="/deliveries" />
             <SaveButton type="submit" />
@@ -86,7 +86,7 @@ export default function DeliveryForm({ location }) {
         </HeaderForm>
         <Content>
           <DataDelivery>
-            <div className="row">
+            <div>
               <AsyncSelect
                 label="Destinatário"
                 name="recipient_id"
@@ -97,7 +97,7 @@ export default function DeliveryForm({ location }) {
                 isDisabled={operation === 'show' ? true : false}
               />
             </div>
-            <div className="row">
+            <div>
               <AsyncSelect
                 label="Entregador"
                 name="deliveryman_id"
@@ -110,7 +110,7 @@ export default function DeliveryForm({ location }) {
             </div>
           </DataDelivery>
           <label htmlFor="product">Nome do Produto</label>
-          <Input name="product" type="text" placeholder="Nome do Produto" disabled={operation === 'show' ? true : false}/>
+          <Input name="product" type="text" placeholder="Nome do Produto" disabled={operation === 'show' ? true : false} />
         </Content>
       </Form>
     </Container>

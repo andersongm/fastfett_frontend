@@ -4,8 +4,9 @@ import { MdMoreHoriz } from 'react-icons/md';
 import api from '~/services/api';
 import HeaderPage from '../../components/HeaderPage';
 import DropDownMenu from '~/components/DropDownMenu';
+import Pagination from '~/components/Pagination';
 
-import memoize from "memoize-one"
+// import memoize from "memoize-one"
 
 export default function Recipients({location}) {
 
@@ -13,22 +14,32 @@ export default function Recipients({location}) {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState('');
   const [currentRow, setCurrentRow] = useState(0);
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [currentPage, setCurentPage] = useState(1);
   const idDelete = location.state?.id;
 
+  async function loadRecipients(page = 1) {
+    const response = await api.get('/recipients', {
+      params: {
+        name,
+        page
+      }
+    });
+
+    const { count, rows } = response.data;
+
+    setRecipients(rows);
+    setCurentPage(page);
+    setTotalRecords(count);
+  }
+
+
   useEffect(() => {
-
-    async function loadRecipients() {
-      console.log('buscando recipients...');
-      const response = await api.get('/recipients');
-      setRecipients(response.data);
-    }
-
     loadRecipients();
+  }, [idDelete, name])
 
-  }, [idDelete])
-
-  const filterRecipients = memoize((recipients, valor) => recipients.filter(recipient => recipient.name.match(new RegExp(valor, 'i'))));
-  const recipientSearch = filterRecipients(recipients.filter(r => r.id !== idDelete), name);
+  // const filterRecipients = memoize((recipients, valor) => recipients.filter(recipient => recipient.name.match(new RegExp(valor, 'i'))));
+  // const recipientSearch = filterRecipients(recipients.filter(r => r.id !== idDelete), name);
 
   function handleMenu(id) {
     setCurrentRow(id);
@@ -52,7 +63,7 @@ export default function Recipients({location}) {
           </tr>
         </thead>
         <tbody>
-          {recipientSearch.map((recipient, index) => (
+          {recipients.map((recipient, index) => (
             <tr key={recipient.id} >
               <td>#{String(recipient.id).padStart(2, "0")}</td>
               <td>{recipient.name}</td>
@@ -62,6 +73,11 @@ export default function Recipients({location}) {
           ))}
         </tbody>
       </TableList>
+      <Pagination
+            currentPage={currentPage}
+            totalRecords={totalRecords}
+            handleChangePage={loadRecipients}
+      />
     </Container>
   )
 }

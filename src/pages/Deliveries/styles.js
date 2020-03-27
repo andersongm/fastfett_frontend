@@ -1,5 +1,18 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+
+export const ContainerModal = styled.div`
+  line-height: 1em;
+  p {
+    margin-bottom: 20px;
+  }
+
+  div.modal-img {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+`;
 
 export const Container = styled.div`
     max-width: 1200px;
@@ -23,76 +36,56 @@ export const Pagination = styled.div`
   }
 `;
 
-
 export const TableList = styled.table`
   width: 100%;
-  background: #fff;
-  border-radius: 4px;
-  /* border-collapse: collapse;  */
-  padding: 30px 30px;
-  font-size: 16px;
-  color: #666;
-
+  border-spacing: 0 10px;
 
   thead {
-    text-align: left;
-
     tr {
-        display: flex;
+      th {
+        font-weight: bold;
+        text-align: left;
+        color: #444;
+        padding: 0 10px;
 
-        th {
-            width: 35%;
-
-            &:first-child {
-              width: 10%
-            }
-
-            &:nth-child(6){
-              width: 40%;
-            }
-
-            &:last-child {
-              width: 15%;
-              text-align: center;
-            }
-
+        &:last-child {
+          text-align: right;
         }
-
+      }
     }
   }
 
   tbody {
-
-    tr:hover.delivery {
-      background: ${darken(0.2, '#fff')};
-    }
-
     tr {
-        display: flex;
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
+      background: #fff;
 
+      td {
+        padding: 10px;
+        color: #666666;
 
-        td {
-            width: 35%;
-
-            &:first-child {
-              width: 10%
-            }
-
-            &:nth-child(6){
-              width: 40%;
-            }
-
-            &:last-child {
-              width: 15%;
-              text-align: center;
-            }
-
+        &:first-child {
+          width: 40px;
         }
 
+        &:nth-child(3){
+          display: flex;
+          align-items: center;
+        }
+
+        &:last-child {
+          width: 40px;
+          text-align: center;
+
+          svg {
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+
+        }
+      }
     }
-
   }
-
-  `;
+`;

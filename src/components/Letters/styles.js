@@ -3,19 +3,14 @@ import styled from 'styled-components';
 export const Container = styled.div`
   /* background: #ccc; */
   color: ${props => (props.color)};
-  background: ${props => (props.bkcolor)};
-  margin-right: 3px;
+  background: ${props => (props.color)+'30'};
+  margin-right: 5px;
   border-radius: 53px;
   padding: 4px;
-  font-size: 15px;
+  font-size: 14px;
   width: 25px;
   height: 25px;
   justify-content: center;
+  align-items: center;
   display: flex;
 `;
-
-export const Avatar = styled.img`
-  height: 20px;
-  width: 20px;
-`;
-
