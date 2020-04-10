@@ -11,17 +11,12 @@ export default function AvatarInput({ name, avatar }) {
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
   const ref = useRef();
 
-  console.log('name:', name);
-
   async function getFile(id) {
     const { data } = await api.get(`/avatarfiles/${id}`);
     setPreview(data.url);
   }
 
   useEffect(() => {
-
-    //console.log('defaultValue:', defaultValue);
-
     if (defaultValue) {
       getFile(defaultValue);
     }
@@ -29,14 +24,9 @@ export default function AvatarInput({ name, avatar }) {
 
   useEffect(() => {
 
-    console.log('ref:', ref.current);
-    console.log('fieldName:', fieldName);
-    console.log('registerField:', registerField);
-    console.log('defaultValue:', defaultValue);
-
     if (ref.current) {
       registerField({
-        name: fieldName,//'avatar_id',
+        name: fieldName,
         ref: ref.current,
         path: 'dataset.file',
       });
@@ -51,8 +41,6 @@ export default function AvatarInput({ name, avatar }) {
     const response = await api.post('avatarfiles', data);
     const { id, url } = response.data;
 
-    console.log(response.data);
-
     setFile(id);
     setPreview(url);
   }
@@ -61,7 +49,7 @@ export default function AvatarInput({ name, avatar }) {
       <label htmlFor="avatar">
         <img
           src={
-            preview || 'https://api.adorable.io/avatars/50/abott@adorable.png'
+            preview || avatar || 'https://api.adorable.io/avatars/50/abott@adorable.png'
           }
           alt="Avatar"
         />
