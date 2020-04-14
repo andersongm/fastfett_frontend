@@ -29,7 +29,7 @@ export default function Routes() {
       <Route path="/recipients/add" exact component={AddRecipients} isPrivate />
       <Route path="/recipients/edit" exact component={EditRecipients} isPrivate />
       <Route path="/problems" exact component={Problems} isPrivate />
-      <Route path="/problems/show" exact component={Problems} isPrivate />
+      {/* <Route path="/problems/show" exact component={Problems} isPrivate /> */}
     </Switch>
   );
 }

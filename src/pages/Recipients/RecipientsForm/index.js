@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react';
+import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import InputMask from '~/components/InputMask';
 import { toast } from 'react-toastify';

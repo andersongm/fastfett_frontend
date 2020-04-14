@@ -5,13 +5,6 @@ export const Container = styled.div`
     margin: 0 auto;
 `;
 
-export const ContainerModal = styled.div`
-  line-height: 2em;
-  p {
-    margin-bottom: 20px;
-  }
-`;
-
 export const TableList = styled.table`
   width: 100%;
   border-spacing: 0 10px;

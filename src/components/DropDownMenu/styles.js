@@ -45,3 +45,10 @@ export const Container = styled.div`
     }
 
 `;
+
+export const ContainerModal = styled.div`
+  line-height: 2em;
+  p {
+    margin-bottom: 20px;
+  }
+`;

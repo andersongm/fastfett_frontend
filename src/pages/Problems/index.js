@@ -1,30 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Container, TableList, ContainerModal } from './styles';
+import { Container, TableList } from './styles';
 import { MdMoreHoriz } from 'react-icons/md';
 import api from '~/services/api';
 import HeaderPage from '../../components/HeaderPage';
 import DropDownMenu from '~/components/DropDownMenu';
 import Pagination from '~/components/Pagination';
-//import Modal from '~/components/Modal';
-import Modal from '~/components/ReactModal';
-
-const ContentModal = ({ item }) => {
-  return (
-    <ContainerModal>
-      <p>
-        <strong>VISUALIZAR PROBLEMA</strong>
-      </p>
-      <p>{item && item.description}</p>
-    </ContainerModal>
-  );
-}
 
 export default function Problems({ location }) {
 
   const [problems, setProblems] = useState([]);
   const [visible, setVisible] = useState(false);
   const [currentRow, setCurrentRow] = useState(0);
-  const [modalShow, setModalShow] = useState(false);
   const [totalRecords, setTotalRecords] = useState(0);
   const [currentPage, setCurentPage] = useState(1);
   const item = location.state?.item;
@@ -48,7 +34,6 @@ export default function Problems({ location }) {
   useEffect(() => {
     if (item) {
       setVisible(false);
-      setModalShow(!!item);
     }
   }, [item])
 
@@ -59,14 +44,6 @@ export default function Problems({ location }) {
 
   return (
     <Container>
-      {/* <Modal title="Visualizar Problema"
-             showModal={modalShow}
-             onHide={() => setModalShow(false)}>
-          <ContentModal item={item}/>
-      </Modal> */}
-      <Modal open={modalShow} setOpen={setModalShow}>
-        <ContentModal item={item} />
-      </Modal>
       <HeaderPage title="Problemas na Entrega" />
       <TableList>
         <thead>
