@@ -38,7 +38,8 @@ export default function DeliveryMansForm({ location }) {
         toast.success('Entregador Salvo com Sucesso!')
       }
     } catch (error) {
-      toast.error(`Falha ao salvar entregador! \n ${error}`);
+      console.log(JSON.stringify(error));
+      toast.error(`Falha ao salvar entregador! \n ${error.response.data.error}`);
     }
   }
 
@@ -55,7 +56,6 @@ export default function DeliveryMansForm({ location }) {
         <Content>
 
           <AvatarInput name="avatar_id" avatar={item?.avatar?.url}/>
-          {/* <AvatarInput name="avatar_id" /> */}
 
           <label htmlFor="name">Nome</label>
           <Input name="name" placeholder="Nome"/>

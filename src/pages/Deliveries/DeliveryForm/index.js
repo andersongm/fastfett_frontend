@@ -70,7 +70,7 @@ export default function DeliveryForm({ location }) {
         toast.success('Encomenda Salva com Sucesso!')
       }
     } catch (error) {
-      toast.error(`Falha ao salvar encomenda! \n ${error}`);
+      toast.error(`Falha ao salvar encomenda! \n ${error.response.data.error}`);
     }
   }
 

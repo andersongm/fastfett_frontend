@@ -1,5 +1,7 @@
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import InputMask from '~/components/InputMask';
+//import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify';
 import { Container, Content, HeaderForm } from './styles';
 import SaveButton from '../../../components/SaveButton';
@@ -15,6 +17,7 @@ export default function RecipientsForm({ location }) {
     name: Yup.string().required('Nome é obrigatório'),
     street: Yup.string().required('Logradouro é obrigatório'),
     number: Yup.string(),
+    complement: Yup.string(),
     city: Yup.string().required('Cidade é obrigatória'),
     state: Yup.string().max(2).required('Estado é obrigatório'),
     zip_code: Yup.string().required('Cep é obrigatório'),
@@ -24,17 +27,7 @@ export default function RecipientsForm({ location }) {
   const item = location.state?.item;
   const operation = location.pathname.split('/')[2];
 
-  // function getTitlePage(operation) {
-  //   const title = {
-  //     'add': 'Cadastro de Destinatários',
-  //     'edit': 'Edição de Destinatários',
-  //   }
-  //   return title[operation];
-  // }
-
   async function handleSubmit(data) {
-    console.log(data);
-
     try {
 
       let response = null;
@@ -59,7 +52,7 @@ export default function RecipientsForm({ location }) {
     <Container>
       <Form schema={schema} id="recipients" initialData={recipients} onSubmit={handleSubmit}>
         <HeaderForm>
-          <h2>{getTitlePage(operation,"Destinatários")}</h2>
+          <h2>{getTitlePage(operation, "Destinatários")}</h2>
           <div>
             <BackButton to="/recipients" />
             <SaveButton type="submit" />
@@ -95,7 +88,11 @@ export default function RecipientsForm({ location }) {
             </div>
             <div>
               <label htmlFor="zip_code">CEP</label>
-              <Input name="zip_code" type="text" placeholder="CEP" />
+              <InputMask
+                name="zip_code"
+                mask="99999-999"
+                placeholder="CEP"
+              />
             </div>
           </div>
         </Content>

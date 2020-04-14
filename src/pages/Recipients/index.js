@@ -52,7 +52,9 @@ export default function Recipients({location}) {
         title="Gerenciando Destinatários"
         pathButton="/recipients/add"
         placeholderSearch="Buscar Destinatários"
-        onChange={e => setName(e.target.value)} value={name}/>
+        onChange={e => setName(e.target.value)} value={name}
+        clear={() => setName('')}
+        />
       <TableList>
         <thead>
           <tr>

@@ -50,7 +50,9 @@ export default function Deliverymans({location}) {
         title="Gerenciando Entregadores"
         pathButton="/deliverymans/add"
         placeholderSearch="Buscar Entregadores"
-        onChange={e => setName(e.target.value)} value={name}/>
+        onChange={e => setName(e.target.value)} value={name}
+        clear={() => setName('')}
+        />
       <TableList>
         <thead>
           <tr>

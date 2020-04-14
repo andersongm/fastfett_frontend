@@ -8,7 +8,7 @@ import InitialName from '~/components/InitialName';
 import PillsStatus from '~/components/PillsStatus';
 import HeaderPage from '../../components/HeaderPage';
 import DropDownMenu from '~/components/DropDownMenu';
-//import Modal from '~/components/Modal';
+import history from '~/services/history';
 import Modal from '~/components/ReactModal';
 import { getColor } from '~/util/Util';
 import Pagination from '~/components/Pagination';
@@ -25,7 +25,6 @@ function getLetters(name) {
 }
 
 const ContentModal = ({ item }) => {
-
   if (!item) {
     return <></>
   }
@@ -51,7 +50,7 @@ const ContentModal = ({ item }) => {
       </div>
       <hr />
       <div className="modal-img">
-        <img src='https://api.adorable.io/avatars/50/abott@adorable.png' alt="signature" />
+        {item.signature?.url && <img src={item.signature?.url } alt="signature" />}
       </div>
     </ContainerModal>
   );
@@ -114,14 +113,14 @@ export default function Deliveries({ location }) {
     setVisible(!visible);
   }
 
+  function closeModal() {
+    history.goBack();
+    setModalShow(!modalShow)
+  }
+
   return (
     <Container>
-      {/* <Modal title="Encomenda"
-        showModal={modalShow}
-        onHide={() => setModalShow(false)}>
-        <ContentModal item={item} />
-      </Modal> */}
-      <Modal open={modalShow} setOpen={setModalShow}>
+      <Modal open={modalShow} setOpen={closeModal}>
         <ContentModal item={item} />
       </Modal>
 
@@ -129,7 +128,10 @@ export default function Deliveries({ location }) {
         title="Gerenciando Encomendas"
         pathButton="/deliveries/add"
         placeholderSearch="Buscar Encomendas"
-        onChange={e => setProduct(e.target.value)} value={product} />
+        onChange={e => setProduct(e.target.value)}
+        value={product}
+        clear={() => setProduct('')}
+      />
 
       <TableList>
         <thead>

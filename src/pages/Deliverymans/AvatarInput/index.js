@@ -7,7 +7,7 @@ import api from '~/services/api';
 
 export default function AvatarInput({ name, avatar }) {
   const { fieldName, registerField, defaultValue } = useField(name);
-  const [file, setFile] = useState(defaultValue && defaultValue.id);
+  const [file, setFile] = useState(defaultValue && defaultValue.id || 0);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
   const ref = useRef();
 

@@ -14,7 +14,7 @@ export const Container = styled.div`
 
 export const ModalView = styled.div`
     width: 450px;
-    height: 350px;
+    height: 380px;
     /* border: 1px solid; */
     background: #fff;
     align-self: center;
@@ -57,13 +57,13 @@ export const Content = styled.div`
     padding: 6px 10px;
   }
 
-  div.modal-img {
+  /* div.modal-img {
     display: flex;
     align-items: center;
     height: 100px;
     flex-direction: column;
     justify-content: center;
-  }
+  } */
 
 `;
 

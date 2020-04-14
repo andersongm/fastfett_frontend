@@ -3,15 +3,20 @@ import styled from 'styled-components';
 export const ContainerModal = styled.div`
   line-height: 1em;
   p {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   div.modal-img {
     display: flex;
     justify-content: center;
-    padding: 20px;
-  }
+    padding: 10px 0 0;
 
+    img {
+      width: 100%;
+      height: 200px;
+    }
+
+  }
 `;
 
 export const Container = styled.div`
