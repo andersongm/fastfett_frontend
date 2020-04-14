@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import InputMask from '~/components/InputMask';
-//import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify';
 import { Container, Content, HeaderForm } from './styles';
 import SaveButton from '../../../components/SaveButton';
@@ -28,6 +27,7 @@ export default function RecipientsForm({ location }) {
   const operation = location.pathname.split('/')[2];
 
   async function handleSubmit(data) {
+
     try {
 
       let response = null;

@@ -30,6 +30,11 @@ export default function HeaderPage({ pathButton, title, placeholderSearch, onCha
 
 HeaderPage.propTypes = {
   pathButton: PropTypes.string,
+  title: PropTypes.string,
+  placeholderSearch: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+  clear: PropTypes.func,
 };
 
 HeaderPage.defaultProps = {

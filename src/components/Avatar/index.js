@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { AvatarImage } from './styles';
 
 export default function Avatar({url}) {
@@ -7,3 +7,8 @@ export default function Avatar({url}) {
     <AvatarImage src={url} alt="Avatar" />
   );
 }
+
+
+Avatar.propTypes = {
+  url: PropTypes.string
+};

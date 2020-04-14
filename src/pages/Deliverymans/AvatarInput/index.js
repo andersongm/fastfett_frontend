@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import { Container } from './styles';
-import { MdInsertPhoto } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 
 export default function AvatarInput({ name, avatar }) {
   const { fieldName, registerField, defaultValue } = useField(name);
-  const [file, setFile] = useState(defaultValue && defaultValue.id || 0);
+  const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
   const ref = useRef();
 
@@ -66,3 +66,8 @@ export default function AvatarInput({ name, avatar }) {
     </Container>
   );
 }
+
+AvatarInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  avatar: PropTypes.string
+};

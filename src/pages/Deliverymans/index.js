@@ -10,7 +10,7 @@ import Pagination from '~/components/Pagination';
 
 export default function Deliverymans({location}) {
 
-  const [deliverymans, setDeliverieMans] = useState([]);
+  const [deliverymans, setDeliveryMans] = useState([]);
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState('');
   const [currentRow, setCurrentRow] = useState(0);
@@ -18,7 +18,7 @@ export default function Deliverymans({location}) {
   const [currentPage, setCurentPage] = useState(1);
   const idDelete = location.state?.id;
 
-  async function loadDeliverieMans(page = 1) {
+  async function loadDeliveryMans(page = 1) {
     const response = await api.get('/deliverymans', {
       params: {
         name,
@@ -27,13 +27,13 @@ export default function Deliverymans({location}) {
     });
 
     const { count, rows } = response.data;
-    setDeliverieMans(rows);
+    setDeliveryMans(rows);
     setCurentPage(page);
     setTotalRecords(count);
   }
 
   useEffect(() => {
-    loadDeliverieMans();
+    loadDeliveryMans();
   }, [idDelete, name])
 
   // const filterDeliveryMan = memoize((deliverymans, valor) => deliverymans.filter(deliveryMan => deliveryMan.name.match(new RegExp(valor, 'i'))));
@@ -78,7 +78,7 @@ export default function Deliverymans({location}) {
       <Pagination
             currentPage={currentPage}
             totalRecords={totalRecords}
-            handleChangePage={loadDeliverieMans}
+            handleChangePage={loadDeliveryMans}
       />
     </Container>
   )

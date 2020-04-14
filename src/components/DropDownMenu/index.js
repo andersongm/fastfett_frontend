@@ -75,7 +75,6 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
             }
 
             toast.success('Registro Excluído com Sucesso!');
-            console.log('excluindo...', id)
             history.push(`/${entity}/`, { id })
           }
         },
@@ -149,6 +148,8 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
 }
 
 DropDownMenu.propTypes = {
-  size: propTypes.array
+  visible: propTypes.bool,
+  entity: propTypes.string,
+  item: propTypes.object
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Avatar from '~/components/Avatar';
 import Letters from '~/components/Letters';
 
@@ -14,3 +15,8 @@ export default function InitialName({ letters, avatar}) {
     </>
   );
 }
+
+InitialName.propTypes = {
+  letters: PropTypes.string,
+  avatar: PropTypes.string,
+};

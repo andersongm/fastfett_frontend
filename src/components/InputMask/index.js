@@ -13,7 +13,9 @@ export default function Input({ name, mask, ...rest }) {
       ref: ref.current,
       path: 'value',
     });
-  }, [ref.current, fieldName]);
+  }, [fieldName,registerField]);
+
+  // }, [ref.current, fieldName,]);
 
   return (
     <InputMask

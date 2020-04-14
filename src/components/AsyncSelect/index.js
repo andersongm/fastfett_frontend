@@ -3,6 +3,7 @@ import AsyncSelect from 'react-select/async';
 import { useField } from '@rocketseat/unform';
 import api from '~/services/api';
 import { asyncSelectStyles } from './styles';
+import PropTypes from 'prop-types';
 
 export default function AsyncSelectInput({ label, name, entity, selectValue, ...rest }) {
   const ref = useRef(null);
@@ -60,3 +61,10 @@ export default function AsyncSelectInput({ label, name, entity, selectValue, ...
     </>
   );
 }
+
+AsyncSelectInput.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string,
+  entity: PropTypes.string,
+  selectValue: PropTypes.string,
+};
